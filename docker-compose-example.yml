@@ -5,13 +5,13 @@ version: "3.8"
 services:
   # Bot service
   inhouse_bot:
-    image: mrtolkien/inhouse_bot
+    image: deam147/inhousebotanalystdeam
     environment:
       # The connection string is an SQLAlchemy connection string, does not need a password since it uses sockets
       INHOUSE_BOT_CONNECTION_STRING: postgresql+psycopg2://postgres:@/inhouse_bot
 
       # You need to put your Discord Bot token here
-      INHOUSE_BOT_TOKEN: ⚠ PUT_YOUR_TOKEN_HERE ⚠
+      INHOUSE_BOT_TOKEN: MTEyNDA2OTUyMjU0Mjk1NjcwNQ.Gg1-p5.HMyV7yid4Eb3LRj_wfaEBmmL6I5jmOwL0KxaYM
 
       # Those emoji help the bot look good and are defined with discord.py emoji syntax
       INHOUSE_BOT_TOP_EMOJI: '<:TOP:770815146452451359>'

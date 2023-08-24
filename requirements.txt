@@ -2,7 +2,7 @@
 # This is only *production* requirements, dev requirements (pytest) are in the Dockerfile
 
 # The main package
-discord-py
+discord.py==1.5.1
 
 # ORM for our data storage flow
 sqlalchemy
@@ -38,3 +38,5 @@ git+https://github.com/Rapptz/discord-ext-menus
 
 # Pretty help
 discord-pretty-help
+
+

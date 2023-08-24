@@ -1,8 +1,8 @@
-FROM python AS inhouse_bot
+FROM python:3.8 AS inhouse_bot
 
 # Installing from files for better readability
 COPY requirements.txt /
-RUN pip install -r /requirements.txt
+RUN pip3.8 install -r requirements.txt
 
 # I’m using a single image at the moment, so I put pytest in it too
 RUN pip install pytest

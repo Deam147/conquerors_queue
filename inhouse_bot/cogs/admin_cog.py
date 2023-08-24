@@ -13,6 +13,8 @@ from inhouse_bot.common_utils.get_server_config import get_server_config
 from inhouse_bot.inhouse_bot import InhouseBot
 from inhouse_bot.queue_channel_handler import queue_channel_handler
 from inhouse_bot.ranking_channel_handler.ranking_channel_handler import ranking_channel_handler
+from inhouse_bot.dodge_channel_handler.dodge_channel_handler import dodge_channel_handler
+
 from inhouse_bot.voice_channel_handler.voice_channel_handler import remove_voice_channels
 
 
@@ -71,7 +73,6 @@ class AdminCog(commands.Cog, name="Admin"):
             f"{member.display_name}’s last game has been scored as a win for his team "
             f"and ratings have been recalculated"
         )
-
     @admin.command()
     async def cancel(self, ctx: commands.Context, member: discord.Member):
         """
@@ -107,6 +108,11 @@ class AdminCog(commands.Cog, name="Admin"):
             ranking_channel_handler.mark_ranking_channel(channel_id=ctx.channel.id, server_id=ctx.guild.id)
             await ctx.send(f"Current channel marked as a ranking channel")
 
+        elif channel_type.upper() == "DODGE":
+            dodge_channel_handler.mark_dodge_channel(channel_id=ctx.channel.id, server_id=ctx.guild.id)
+            await ctx.send(f"Current channel marked as a dodge log channel")
+            await dodge_channel_handler.sendDodgeMessage("TEST NOMBRE","TEST ID 1234",self.bot)
+
         else:
             await ctx.send(f"Accepted values for {PREFIX}admin mark are QUEUE and RANKING")
 
@@ -118,6 +124,7 @@ class AdminCog(commands.Cog, name="Admin"):
         """
         queue_channel_handler.unmark_queue_channel(ctx.channel.id)
         ranking_channel_handler.unmark_ranking_channel(ctx.channel.id)
+        dodge_channel_handler.unmark_dodge_channel(ctx.channel.id)
 
         await ctx.send(f"The current channel has been reverted to a normal channel")
 

@@ -16,4 +16,4 @@ def migrate():
     # Checking the duo_id column in QueuePlayer, added on December 10 2020
     duo_column_query = """ALTER TABLE queue_player ADD COLUMN IF NOT EXISTS duo_id BIGINT"""
 
-    engine.execute(duo_column_query)
+    #engine.execute(duo_column_query)

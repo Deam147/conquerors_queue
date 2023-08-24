@@ -6,7 +6,8 @@ import discord
 from discord.ext.commands import Bot
 
 from inhouse_bot.queue_channel_handler import queue_channel_handler
-
+from inhouse_bot.dodge_channel_handler.dodge_channel_handler import dodge_channel_handler
+import random
 
 checkmark_logger = logging.getLogger("inhouse_bot_validation")
 
@@ -62,7 +63,7 @@ async def checkmark_validation(
             # A player accepted, we keep him in memory
             if str(reaction.emoji) == "✅":
                 ids_of_players_who_validated.add(user.id)
-
+                
                 checkmark_logger.info(f"Player {user.id} validated")
 
                 if game:
@@ -75,6 +76,8 @@ async def checkmark_validation(
             # A player cancels, we return it and will drop him
             elif str(reaction.emoji) == "❌":
                 checkmark_logger.info(f"Player {user.id} cancelled, exiting validation")
+                #Guardar Log de quien dodgeo
+                await dodge_channel_handler.sendDodgeMessage(user.name,user.id,bot)
 
                 result, ids_to_drop = False, {user.id}
                 break
